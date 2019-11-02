@@ -1,0 +1,33 @@
+<mat-list>
+  <mat-list-item *ngFor="let banking of bankings.change|async" contextMenuActions>
+    <p matLine>{{banking.name}}</p>
+    <mat-action-list>
+      <button mat-list-item (click)="a()"> Save </button>
+      <button mat-list-item (click)="a()"> Undo </button>
+    </mat-action-list>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
+
+<button mat-button
+        alert-confirm name="ngân hàng" (onConfirmed)="onDelete({})">
+  <mat-icon color="warn">delete</mat-icon>
+  Xóa
+</button>
+
+<mat-menu #itemActions="matMenu" xPosition="before" yPosition="below">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="goUpdate(item)">
+      <mat-icon color="primary">edit</mat-icon>
+      Chỉnh sửa
+    </button>
+    <button mat-menu-item alert-confirm name="ngân hàng" (onConfirmed)="onDelete(item)">
+      <mat-icon color="warn">delete</mat-icon>
+      Xóa
+    </button>
+  </ng-template>
+</mat-menu>
+
+<button mat-mini-fab class="fab-bottom-right" (click)="goAdd()">
+  <mat-icon>add</mat-icon>
+</button>
